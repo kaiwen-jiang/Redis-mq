@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.iotplatform.framework.mq.config.IotPlatformMqAutoConfiguration
