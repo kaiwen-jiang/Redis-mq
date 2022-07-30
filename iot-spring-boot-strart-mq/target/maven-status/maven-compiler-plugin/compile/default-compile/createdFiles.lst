@@ -1,9 +1,0 @@
-com\iotplatform\framework\mq\config\IotPlatformMqAutoConfiguration.class
-com\iotplatform\framework\mq\core\pubsub\AbstractChannelMessage.class
-com\iotplatform\framework\mq\core\pubsub\AbstractChannelMessageListener.class
-com\iotplatform\framework\mq\core\RedisMQTemplate.class
-com\iotplatform\framework\mq\core\interceptor\RedisMessageInterceptor.class
-com\iotplatform\framework\mq\core\message\AbstractRedisMessage.class
-com\iotplatform\framework\mq\core\stream\AbstractStreamMessage.class
-org\springframework\data\redis\stream\DefaultStreamMessageListenerContainerX.class
-com\iotplatform\framework\mq\core\stream\AbstractStreamMessageListener.class
