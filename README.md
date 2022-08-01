@@ -25,9 +25,11 @@ iot-redis-mq技术组件，是基于 Redis 实现分布式消息队列：
 *	实现 AbstractStreamMessageListener接口，消费消息。
 
 2. 广播消费
+
 * 广播消费，是指消息发送到 Redis 时，所有消费者（应用 JVM 实例）收到，然后消费成功。
 
 2.1 使用场景
+
 例如说，在应用中，缓存了数据字典等配置表在内存中，可以通过 Redis 广播消费，实现每个应用节点都消费消息，刷新本地内存的缓存。
 又例如说，我们基于 WebSocket 实现了 IM 聊天，在我们给用户主动发送消息时，因为我们不知道用户连接的是哪个提供 WebSocket 的应用，所以可以通过 Redis 广播消费。每个应用判断当前用户是否是和自己提供的 WebSocket 服务连接，如果是，则推送消息给用户。
 
@@ -38,9 +40,9 @@ iot-redis-mq技术组件，是基于 Redis 实现分布式消息队列：
 *	实现 AbstractChannelMessageListener接口，消费消息。
 
 
-# 注意：此插件的正常使用对框架版本要求较高：
-  # spring boot >=2.5.0,
-  # redis client>=5.1
-  # redis >2.3
-  # jdk >=1.8
+## 注意：此插件的正常使用对框架版本要求较高：
+  ## spring boot >=2.5.0,
+  ## redis client>=5.1
+  ## redis >2.3
+  ## jdk >=1.8
 
