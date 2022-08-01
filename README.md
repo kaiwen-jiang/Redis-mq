@@ -1,5 +1,5 @@
 # Redis-mq
-iot-redis-mq技术组件，是基于 Redis 实现分布式消息队列：
+* iot-redis-mq技术组件，是基于 Redis 实现分布式消息队列：
 •	使用 Stream 特性，提供【集群】消费的能力。
 •	使用 Pub/Sub特性，提供【广播】消费的能力。
 
@@ -35,7 +35,7 @@ iot-redis-mq技术组件，是基于 Redis 实现分布式消息队列：
 •	实现 AbstractChannelMessageListener接口，消费消息。
 
 
-注意：此插件的正常使用对框架版本要求较高：
+# 注意：此插件的正常使用对框架版本要求较高：
   # spring boot >=2.5.0,
   # redis client>=5.1
   # redis >2.3
