@@ -32,10 +32,9 @@ import java.util.Properties;
 /**
  * 消息队列配置
  * @author Kevin
- * @date 2022/7/26 10:51
+ * @date 2022/7/26 20:51
  */
 @Configuration
-//@AutoConfigureAfter(RedisConfig.class) // 加载完RedisConfig后再加载此配置
 @Slf4j
 public class IotPlatformMqAutoConfiguration {
 
@@ -48,8 +47,9 @@ public class IotPlatformMqAutoConfiguration {
         return redisMQTemplate;
     }
 
+    
     // ========== 消费者相关 ==========
-
+    
     /**
      * 创建 Redis Pub/Sub 广播消费的容器
      */
@@ -70,10 +70,10 @@ public class IotPlatformMqAutoConfiguration {
         return container;
     }
 
+    
     /**
      * 创建 Redis Stream 集群消费的容器
      *
-     * Redis Stream 的 xreadgroup 命令：https://www.geek-book.com/src/docs/redis/redis/redis.io/commands/xreadgroup.html
      */
     @Bean(initMethod = "start", destroyMethod = "stop")
     public StreamMessageListenerContainer<String, ObjectRecord<String, String>> redisStreamMessageListenerContainer(
@@ -84,12 +84,11 @@ public class IotPlatformMqAutoConfiguration {
         // 创建 options 配置
         StreamMessageListenerContainer.StreamMessageListenerContainerOptions<String, ObjectRecord<String, String>> containerOptions =
                 StreamMessageListenerContainer.StreamMessageListenerContainerOptions.builder()
-                        .batchSize(10) // 一次性最多拉取多少条消息
+                        .batchSize(10) // 批处理数据量
                         .targetType(String.class) // 目标类型。统一使用 String，通过自己封装的 AbstractStreamMessageListener 去反序列化
                         .build();
         // 创建 container 对象
         StreamMessageListenerContainer<String, ObjectRecord<String, String>> container =
-//                StreamMessageListenerContainer.create(redisTemplate.getRequiredConnectionFactory(), containerOptions);
                 DefaultStreamMessageListenerContainerX.create(redisMQTemplate.getRedisTemplate().getRequiredConnectionFactory(), containerOptions);
 
         // 第二步，注册监听器，消费对应的 Stream 主题
@@ -109,16 +108,17 @@ public class IotPlatformMqAutoConfiguration {
             StreamMessageListenerContainer.StreamReadRequestBuilder<String> builder = StreamMessageListenerContainer.StreamReadRequest
                     .builder(streamOffset).consumer(consumer)
                     .autoAcknowledge(false) // 不自动 ack
-                    .cancelOnError(throwable -> false); // 默认配置，发生异常就取消消费，显然不符合预期；因此，我们设置为 false
+                    .cancelOnError(throwable -> false); // 默认配置，发生异常就取消消费。此处存在优化空间。
             container.register(builder.build(), listener);
         });
         return container;
     }
 
+    
+ 
     /**
      * 构建消费者名字，使用本地 IP + 进程编号的方式。
-     * 参考自 RocketMQ clientId 的实现
-     *
+      *
      * @return 消费者名字
      */
     private static String buildConsumerName() {
@@ -136,7 +136,7 @@ public class IotPlatformMqAutoConfiguration {
         int majorVersion = Integer.parseInt(StrUtil.subBefore(version, '.', false));
         if (majorVersion < 5) {
             throw new IllegalStateException(StrUtil.format("您当前的 Redis 版本为 {}，小于最低要求的 5.0.0 版本！" +
-                    "请找组件提供人{}处理。", version, "Kevin"));
+                    "请找组件提供人{}处理/或升级Redis版本。", version, "Kevin"));
         }
     }
 }
