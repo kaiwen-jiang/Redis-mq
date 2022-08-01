@@ -7,6 +7,7 @@ import com.iotplatform.framework.mq.core.message.AbstractRedisMessage;
  * Redis Channel Message 抽象类
  *
  * @author Kevin
+ * @date 2022/7/26 18:51
  */
 public abstract class AbstractChannelMessage extends AbstractRedisMessage  {
 
@@ -16,7 +17,7 @@ public abstract class AbstractChannelMessage extends AbstractRedisMessage  {
      *
      * @return Channel
      */
-    @JsonIgnore // 避免序列化。原因是，Redis 发布 Channel 消息的时候，已经会指定。
+    @JsonIgnore // 避免序列化报错
     public abstract String getChannel();
 
 }
