@@ -6,6 +6,7 @@ import com.iotplatform.framework.mq.core.message.AbstractRedisMessage;
 /**
  * Redis Stream Message 抽象类
  *
+ * @date 2022/7/30 10:51
  * @author Kevin
  */
 public abstract class AbstractStreamMessage extends AbstractRedisMessage{
