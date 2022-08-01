@@ -42,7 +42,8 @@ iot-redis-mq技术组件，是基于 Redis 实现分布式消息队列：
 
 
 ## 注意：此插件的正常使用对框架版本要求较高：
-  ## spring boot >=2.5.0,
+  ## spring boot >=2.5.0
+  ## spring mvc >=5.3.8
   ## redis client>=5.1
   ## redis >2.3
   ## jdk >=1.8
