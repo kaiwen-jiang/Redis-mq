@@ -35,7 +35,7 @@ import java.util.Properties;
  * @date 2022/7/26 10:51
  */
 @Configuration
-@AutoConfigureAfter(RedisConfig.class) // 加载完RedisConfig后再加载此配置
+//@AutoConfigureAfter(RedisConfig.class) // 加载完RedisConfig后再加载此配置
 @Slf4j
 public class IotPlatformMqAutoConfiguration {
 
