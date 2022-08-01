@@ -4,7 +4,7 @@ package com.iotplatform.framework.mq.core.message;
  * Redis 消息抽象基类
  *
  * @author Kevin
- * @date 2022/7/28 15:58
+ * @date 2022/7/28 21:23
  */
 
 import lombok.Data;
