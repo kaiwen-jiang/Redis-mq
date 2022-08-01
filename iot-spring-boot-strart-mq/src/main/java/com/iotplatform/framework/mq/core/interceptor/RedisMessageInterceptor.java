@@ -7,7 +7,7 @@ import com.iotplatform.framework.mq.core.message.AbstractRedisMessage;
  *   通过拦截器，作为插件机制，实现拓展。
  *  后续可应用于多租户场景下的 MQ 消息处理
  * @author Kevin
- * @date 2022/7/28 15:53
+ * @date 2022/7/28 19:53
  */
 public interface RedisMessageInterceptor {
 
