@@ -13,9 +13,8 @@ import java.util.List;
 import java.util.function.Function;
 
 /**
- * 拓展 DefaultStreamMessageListenerContainer 实现，解决 Spring Data Redis + Redisson 结合使用时，Redisson 在 Stream 获得不到数据时，返回 null 而不是空 List，导致 NPE 异常。
+ * 拓展 DefaultStreamMessageListenerContainer 实现（这里在测试过程中偶尔会抛异常所以改写）
  *
- * 目前看下来 Spring Data Redis 不肯加 null 判断，Redisson 暂时也没改返回 null 到空 List 的打算，所以暂时只能自己改，哽咽！
  *
  * @author Kevin
  *
@@ -50,7 +49,7 @@ public class DefaultStreamMessageListenerContainerX<K, V extends Record<K, ?>> e
         Function<ReadOffset, List<ByteRecord>> readFunction = (Function<ReadOffset, List<ByteRecord>>) ReflectUtil.getFieldValue(task, "readFunction");
         ReflectUtil.setFieldValue(task, "readFunction", (Function<ReadOffset, List<ByteRecord>>) readOffset -> {
             List<ByteRecord> records = readFunction.apply(readOffset);
-            //【重点】保证 records 不是空，避免 NPE 的问题！！！
+            //避免 NPE 的问题！！！
             return records != null ? records : Collections.emptyList();
         });
         return task;
