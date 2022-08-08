@@ -85,7 +85,7 @@ public class IotPlatformMqAutoConfiguration {
         StreamMessageListenerContainer.StreamMessageListenerContainerOptions<String, ObjectRecord<String, String>> containerOptions =
                 StreamMessageListenerContainer.StreamMessageListenerContainerOptions.builder()
                         .batchSize(10) // 批处理数据量
-                        .targetType(String.class) // 目标类型。统一使用 String，通过自己封装的 AbstractStreamMessageListener 去反序列化
+                        .targetType(String.class) // 目标类型。统一使用 String。
                         .build();
         // 创建 container 对象
         StreamMessageListenerContainer<String, ObjectRecord<String, String>> container =
@@ -136,7 +136,7 @@ public class IotPlatformMqAutoConfiguration {
         int majorVersion = Integer.parseInt(StrUtil.subBefore(version, '.', false));
         if (majorVersion < 5) {
             throw new IllegalStateException(StrUtil.format("您当前的 Redis 版本为 {}，小于最低要求的 5.0.0 版本！" +
-                    "请找组件提供人{}处理/或升级Redis版本。", version, "Kevin"));
+                    "请联系组件提供人{}处理/或升级Redis版本。", version, "Kevin"));
         }
     }
 }
