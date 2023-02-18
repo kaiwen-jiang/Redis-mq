@@ -45,11 +45,11 @@ public class DefaultStreamMessageListenerContainerX<K, V extends Record<K, ?>> e
     @SuppressWarnings("unchecked")
     private StreamPollTask<K, V> getReadTaskX(StreamReadRequest<K> streamRequest, StreamListener<K, V> listener) {
         StreamPollTask<K, V> task = ReflectUtil.invoke(this, "getReadTask", streamRequest, listener);
-        // 修改 readFunction 方法
+       
         Function<ReadOffset, List<ByteRecord>> readFunction = (Function<ReadOffset, List<ByteRecord>>) ReflectUtil.getFieldValue(task, "readFunction");
         ReflectUtil.setFieldValue(task, "readFunction", (Function<ReadOffset, List<ByteRecord>>) readOffset -> {
             List<ByteRecord> records = readFunction.apply(readOffset);
-            //避免 NPE 的问题！！！
+         
             return records != null ? records : Collections.emptyList();
         });
         return task;
