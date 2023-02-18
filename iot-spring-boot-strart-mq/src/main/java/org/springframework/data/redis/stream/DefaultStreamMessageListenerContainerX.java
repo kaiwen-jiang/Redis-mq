@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.function.Function;
 
 /**
- * 拓展 DefaultStreamMessageListenerContainer 实现（这里在测试过程中偶尔会抛异常所以改写）
+ * 拓展 DefaultStreamMessageListenerContainer 实现
  *
  *
  * @author Kevin
